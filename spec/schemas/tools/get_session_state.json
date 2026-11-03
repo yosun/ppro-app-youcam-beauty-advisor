@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/get_session_state.json",
+  "title": "Read the session (get_session_state) arguments",
+  "description": "Read a compact snapshot of the session: the revision, time and budget left, consent, shared photos, what the client is looking at, what has been shown, and the latest messages. Free.",
+  "type": "object",
+  "properties": {
+    "messages": {
+      "description": "How many recent messages to include. Default 12.",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/ui_request_photo.json",
+  "title": "Ask the client for a selfie (ui_request_photo) arguments",
+  "description": "Ask the client to share a photo of themselves. The app opens a card on the first screen that explains why and offers the live camera and an upload button; it asks for the client's consent first. You cannot take the photo yourself. A photo.added event arrives when they share one. Free.",
+  "type": "object",
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": [
+        "camera",
+        "upload",
+        "either"
+      ]
+    },
+    "reason": {
+      "description": "One short sentence shown to the client.",
+      "type": "string",
+      "maxLength": 120
+    }
+  },
+  "additionalProperties": false
+}

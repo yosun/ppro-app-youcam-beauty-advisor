@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/recommend_products.json",
+  "title": "Recommend products (recommend_products) arguments",
+  "description": "Show the client product cards on their Picks screen for specific products and shades you recommend. Free; no photo needed. Name real, currently sold products and shades you are confident exist, each tied to the client's measured colors, features or skin scores. Write names with their real capitalization. Do not include prices or links: the tier (drugstore, mid-range, prestige) stands in for price. Up to 6 per call, 12 in total; set replace to start the list over.",
+  "type": "object",
+  "properties": {
+    "products": {
+      "minItems": 1,
+      "maxItems": 6,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "primer",
+              "skin tint",
+              "foundation",
+              "concealer",
+              "powder",
+              "setting spray",
+              "bronzer",
+              "contour",
+              "blush",
+              "highlighter",
+              "brow",
+              "eyeshadow",
+              "eyeliner",
+              "mascara",
+              "lashes",
+              "lip liner",
+              "lipstick",
+              "lip tint",
+              "lip gloss",
+              "lip balm",
+              "cleanser",
+              "moisturizer",
+              "sunscreen",
+              "serum",
+              "brush or tool"
+            ]
+          },
+          "brand": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 300,
+            "description": "Product name without the brand."
+          },
+          "shade": {
+            "default": "",
+            "description": "Exact shade name or number. Empty if the product has none.",
+            "type": "string",
+            "maxLength": 200
+          },
+          "why": {
+            "type": "string",
+            "maxLength": 800
+          },
+          "tier": {
+            "type": "string",
+            "enum": [
+              "drugstore",
+              "mid-range",
+              "prestige"
+            ]
+          }
+        },
+        "required": [
+          "category",
+          "brand",
+          "name",
+          "why",
+          "tier"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "replace": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "products"
+  ],
+  "additionalProperties": false
+}

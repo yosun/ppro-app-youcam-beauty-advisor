@@ -1,0 +1,482 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/session.schema.json",
+  "title": "PPRO App session snapshot",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "rev": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "phase": {
+      "type": "string",
+      "enum": [
+        "active",
+        "ended"
+      ]
+    },
+    "createdAt": {
+      "type": "number"
+    },
+    "expiresAt": {
+      "type": "number"
+    },
+    "endedAt": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "endReason": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "host",
+            "expired"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "advisor": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "pronouns": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "persona": {
+          "description": "Present for the host and the agent, never for the client.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "pronouns"
+      ],
+      "additionalProperties": false
+    },
+    "client": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "displayName"
+      ],
+      "additionalProperties": false
+    },
+    "consent": {
+      "type": "object",
+      "properties": {
+        "adult": {
+          "type": "boolean"
+        },
+        "photoAnalysis": {
+          "type": "boolean"
+        },
+        "at": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "client",
+                "host"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "adult",
+        "photoAnalysis",
+        "at",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "agentVision": {
+          "type": "boolean"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "hostOrigin": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "minutes": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "agentVision",
+        "locale",
+        "hostOrigin",
+        "minutes"
+      ],
+      "additionalProperties": false
+    },
+    "budget": {
+      "type": "object",
+      "properties": {
+        "unitsTotal": {
+          "type": "number"
+        },
+        "unitsUsed": {
+          "type": "number"
+        },
+        "unitsRemaining": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "unitsTotal",
+        "unitsUsed",
+        "unitsRemaining"
+      ],
+      "additionalProperties": false
+    },
+    "engine": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "live",
+            "simulated",
+            "unavailable"
+          ]
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "additionalProperties": false
+    },
+    "photos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "at": {
+            "type": "number"
+          },
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          },
+          "bytes": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "at",
+          "width",
+          "height",
+          "bytes"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "messages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "seq": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "at": {
+            "type": "number"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "client",
+              "agent",
+              "tool",
+              "system"
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "description": "text and photo, or a kind the app adds for its tool results."
+          },
+          "body": {
+            "type": "string"
+          },
+          "spoken": {
+            "description": "Agent text only: the same words made safe to read aloud.",
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "seq",
+          "at",
+          "role",
+          "kind",
+          "body"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "messageCount": {
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
+    },
+    "app": {
+      "description": "The app's own state. The manifest's `state` describes it."
+    },
+    "ui": {
+      "type": "object",
+      "properties": {
+        "screen": {
+          "type": "string"
+        },
+        "target": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "focus": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "screen": {
+                  "type": "string"
+                },
+                "target": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "screen",
+                "target"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "following": {
+          "type": "boolean"
+        },
+        "mediaRequest": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "const": "photo"
+                },
+                "mode": {
+                  "type": "string",
+                  "enum": [
+                    "camera",
+                    "upload",
+                    "either"
+                  ]
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "at": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "kind",
+                "mode",
+                "reason",
+                "at"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "notice": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                },
+                "tone": {
+                  "type": "string",
+                  "enum": [
+                    "info",
+                    "warn"
+                  ]
+                },
+                "at": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "text",
+                "tone",
+                "at"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nudge": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "target": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "at": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "target",
+                "label",
+                "at"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "capturing": {
+          "type": "boolean"
+        },
+        "available": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "view": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "screen",
+        "target",
+        "focus",
+        "following",
+        "mediaRequest",
+        "notice",
+        "nudge",
+        "capturing",
+        "available",
+        "view"
+      ],
+      "additionalProperties": false
+    },
+    "presence": {
+      "type": "string",
+      "enum": [
+        "idle",
+        "thinking",
+        "speaking",
+        "listening"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "rev",
+    "phase",
+    "createdAt",
+    "expiresAt",
+    "endedAt",
+    "endReason",
+    "advisor",
+    "client",
+    "consent",
+    "options",
+    "budget",
+    "engine",
+    "photos",
+    "messages",
+    "messageCount",
+    "app",
+    "ui",
+    "presence"
+  ],
+  "additionalProperties": false
+}

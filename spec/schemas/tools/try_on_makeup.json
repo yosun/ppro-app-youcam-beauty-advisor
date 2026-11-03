@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/try_on_makeup.json",
+  "title": "Try on custom colors (try_on_makeup) arguments",
+  "description": "Virtually apply custom makeup colors to the client's photo with YouCam Makeup Virtual Try-On. Give at least one of lip_color, blush_color or eyeshadow_color as #RRGGBB. For a complete look (eyes, liner, lashes, contour) use try_on_full_look instead. Costs 1 unit.",
+  "type": "object",
+  "properties": {
+    "lip_color": {
+      "type": "string",
+      "pattern": "^#?[0-9A-Fa-f]{6}$"
+    },
+    "lip_finish": {
+      "type": "string",
+      "enum": [
+        "matte",
+        "satin",
+        "gloss",
+        "sheer"
+      ]
+    },
+    "blush_color": {
+      "type": "string",
+      "pattern": "^#?[0-9A-Fa-f]{6}$"
+    },
+    "eyeshadow_color": {
+      "type": "string",
+      "pattern": "^#?[0-9A-Fa-f]{6}$"
+    },
+    "eyeshadow_finish": {
+      "type": "string",
+      "enum": [
+        "matte",
+        "shimmer"
+      ]
+    },
+    "intensity": {
+      "type": "string",
+      "enum": [
+        "soft",
+        "medium",
+        "bold"
+      ]
+    },
+    "photo_id": {
+      "description": "A specific shared photo. Omit to use the latest photo.",
+      "type": "string",
+      "maxLength": 64
+    }
+  },
+  "additionalProperties": false
+}

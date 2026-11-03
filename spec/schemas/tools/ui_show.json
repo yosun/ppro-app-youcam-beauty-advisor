@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/ui_show.json",
+  "title": "Show a screen or point at something (ui_show) arguments",
+  "description": "Take the client to a screen, or point at one item on it (a target from a tool result, such as skin:pore, step:1 or shade:0). By default the app follows you until the client takes over by tapping; pass take_control=false to only leave a gentle pointer without moving the screen. Use it like a presenter: show the part you are talking about. Free.",
+  "type": "object",
+  "properties": {
+    "screen": {
+      "description": "A screen id from the manifest.",
+      "type": "string",
+      "maxLength": 24
+    },
+    "target": {
+      "description": "A target, such as skin:acne or shade:1.",
+      "type": "string",
+      "maxLength": 60
+    },
+    "take_control": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

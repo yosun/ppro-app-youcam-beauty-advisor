@@ -1,0 +1,443 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/manifest.schema.json",
+  "title": "PPRO App manifest",
+  "type": "object",
+  "properties": {
+    "protocol": {
+      "type": "string",
+      "const": "ppro-app/1"
+    },
+    "app": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{1,60}$"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "version",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "skill": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "provider": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "url"
+      ],
+      "additionalProperties": false
+    },
+    "endpoints": {
+      "type": "object",
+      "properties": {
+        "api": {
+          "type": "string"
+        },
+        "manifest": {
+          "type": "string"
+        },
+        "events": {
+          "type": "string"
+        },
+        "mcp": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ui": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "api",
+        "manifest",
+        "events",
+        "mcp",
+        "ui"
+      ],
+      "additionalProperties": false
+    },
+    "auth": {
+      "type": "object",
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "const": "bearer"
+        },
+        "roles": {
+          "type": "object",
+          "properties": {
+            "host": {
+              "type": "string"
+            },
+            "agent": {
+              "type": "string"
+            },
+            "client": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "host",
+            "agent",
+            "client"
+          ],
+          "additionalProperties": false
+        },
+        "tokenLocation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "scheme",
+        "roles",
+        "tokenLocation"
+      ],
+      "additionalProperties": false
+    },
+    "capabilities": {
+      "type": "object",
+      "properties": {
+        "engine": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": [
+                "live",
+                "simulated",
+                "unavailable"
+              ]
+            },
+            "provider": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "mode",
+            "provider"
+          ],
+          "additionalProperties": false
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mcp": {
+          "type": "boolean"
+        },
+        "toolFormats": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "agentVision": {
+          "type": "boolean"
+        },
+        "speech": {
+          "type": "object",
+          "properties": {
+            "spokenText": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "spokenText"
+          ],
+          "additionalProperties": false
+        },
+        "embedding": {
+          "type": "boolean"
+        },
+        "standalone": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "engine",
+        "events",
+        "mcp",
+        "toolFormats",
+        "agentVision",
+        "speech",
+        "embedding",
+        "standalone"
+      ],
+      "additionalProperties": false
+    },
+    "limits": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "screens": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "filledBy": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "description",
+          "filledBy"
+        ],
+        "additionalProperties": false
+      },
+      "description": "The first screen is always available."
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "section": {
+            "type": "string"
+          },
+          "screen": {
+            "type": "string"
+          },
+          "item": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "section",
+          "screen",
+          "item",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "state": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {},
+      "description": "JSON Schema of the session's `app` object."
+    },
+    "tools": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{1,40}$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string",
+            "enum": [
+              "analysis",
+              "presentation",
+              "ui",
+              "session"
+            ]
+          },
+          "cost": {
+            "type": "string",
+            "description": "Price in provider units, for example \"9-16 units\" or \"free\"."
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "needsPhoto": {
+            "type": "boolean"
+          },
+          "inputSchema": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {},
+            "description": "JSON Schema (2020-12) for the tool's arguments."
+          }
+        },
+        "required": [
+          "name",
+          "title",
+          "description",
+          "group",
+          "cost",
+          "readOnly",
+          "needsPhoto",
+          "inputSchema"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "messageKinds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "advisor": {
+      "type": "object",
+      "properties": {
+        "guardrails": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "disclaimer": {
+          "type": "string"
+        },
+        "starters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "instructions": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "guardrails",
+        "disclaimer",
+        "starters",
+        "instructions"
+      ],
+      "additionalProperties": false
+    },
+    "privacy": {
+      "type": "object",
+      "properties": {
+        "photosStoredOnDisk": {
+          "type": "boolean"
+        },
+        "retention": {
+          "type": "string"
+        },
+        "sensitiveAttributes": {
+          "type": "string"
+        },
+        "consent": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "photosStoredOnDisk",
+        "retention",
+        "sensitiveAttributes",
+        "consent"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "protocol",
+    "app",
+    "skill",
+    "provider",
+    "endpoints",
+    "auth",
+    "capabilities",
+    "limits",
+    "screens",
+    "targets",
+    "state",
+    "tools",
+    "events",
+    "messageKinds",
+    "advisor",
+    "privacy"
+  ],
+  "additionalProperties": false
+}

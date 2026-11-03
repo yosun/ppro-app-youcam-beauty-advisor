@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/ui_notice.json",
+  "title": "Show a short notice (ui_notice) arguments",
+  "description": "Show the client a short banner at the top of the app, for example 'Move a little closer to the window'. It stays until the client dismisses it or you replace it. Free.",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "info",
+        "warn"
+      ]
+    }
+  },
+  "required": [
+    "text"
+  ],
+  "additionalProperties": false
+}

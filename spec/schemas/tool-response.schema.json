@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tool-response.schema.json",
+  "title": "PPRO App tool response",
+  "type": "object",
+  "properties": {
+    "ok": {
+      "type": "boolean"
+    },
+    "tool": {
+      "type": "string"
+    },
+    "callId": {
+      "type": "string"
+    },
+    "units": {
+      "type": "number"
+    },
+    "result": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "detail": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "additionalProperties": false
+    },
+    "rev": {
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
+    },
+    "unitsRemaining": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "ok",
+    "tool",
+    "callId",
+    "units",
+    "result",
+    "rev",
+    "unitsRemaining"
+  ],
+  "additionalProperties": false
+}

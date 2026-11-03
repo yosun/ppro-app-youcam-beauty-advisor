@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/list_makeup_looks.json",
+  "title": "Browse makeup looks (list_makeup_looks) arguments",
+  "description": "Browse YouCam's curated full-face makeup looks. Free. Returns look ids and titles to suggest; apply one with try_on_look.",
+  "type": "object",
+  "properties": {
+    "category": {
+      "type": "string",
+      "enum": [
+        "Daily",
+        "Work",
+        "Party",
+        "Wedding",
+        "Makeup Artist",
+        "K-Pop",
+        "Red Carpet",
+        "Fashion Week",
+        "Celebrity",
+        "Spring",
+        "Summer",
+        "Valentine",
+        "Halloween"
+      ]
+    },
+    "search": {
+      "description": "Optional words to match in look titles.",
+      "type": "string",
+      "maxLength": 60
+    }
+  },
+  "additionalProperties": false
+}

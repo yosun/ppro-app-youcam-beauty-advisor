@@ -1,0 +1,21 @@
+node_modules/
+dist/
+coverage/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.DS_Store
+
+# Secrets and local configuration. Only .env.example is tracked.
+.env
+.env*
+!.env.example
+*.tfvars
+*.tfvars.json
+*.tfstate
+*.tfstate.*
+.terraform/
+*.pem
+
+# Anything a developer drops here stays local.
+.local/

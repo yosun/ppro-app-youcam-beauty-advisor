@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/set_presence.json",
+  "title": "Show what the advisor is doing (set_presence) arguments",
+  "description": "Tell the app what you are doing so it can show it: thinking (typing indicator), speaking (a voice is playing), listening, or idle. Free.",
+  "type": "object",
+  "properties": {
+    "state": {
+      "type": "string",
+      "enum": [
+        "idle",
+        "thinking",
+        "speaking",
+        "listening"
+      ]
+    }
+  },
+  "required": [
+    "state"
+  ],
+  "additionalProperties": false
+}

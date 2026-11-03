@@ -1,0 +1,1044 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/event.schema.json",
+  "title": "PPRO App event",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "at": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "const": "session.started"
+        },
+        "actor": {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "app",
+            "host"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "session": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "expiresAt": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "id",
+                "expiresAt"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "session"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rev",
+        "at",
+        "type",
+        "actor",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "at": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "const": "session.ended"
+        },
+        "actor": {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "app",
+            "host"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "reason": {
+              "type": "string",
+              "enum": [
+                "client",
+                "agent",
+                "host",
+                "expired"
+              ]
+            }
+          },
+          "required": [
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rev",
+        "at",
+        "type",
+        "actor",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "at": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "const": "session.warning"
+        },
+        "actor": {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "app",
+            "host"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "minutesLeft": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "minutesLeft"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rev",
+        "at",
+        "type",
+        "actor",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "at": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "const": "consent.updated"
+        },
+        "actor": {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "app",
+            "host"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "consent": {
+              "type": "object",
+              "properties": {
+                "adult": {
+                  "type": "boolean"
+                },
+                "photoAnalysis": {
+                  "type": "boolean"
+                },
+                "at": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "source": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "host"
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "adult",
+                "photoAnalysis",
+                "at",
+                "source"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "consent"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rev",
+        "at",
+        "type",
+        "actor",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "at": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "const": "message.created"
+        },
+        "actor": {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "app",
+            "host"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "object",
+              "properties": {
+                "seq": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9007199254740991
+                },
+                "at": {
+                  "type": "number"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "client",
+                    "agent",
+                    "tool",
+                    "system"
+                  ]
+                },
+                "kind": {
+                  "type": "string",
+                  "description": "text and photo, or a kind the app adds for its tool results."
+                },
+                "body": {
+                  "type": "string"
+                },
+                "spoken": {
+                  "description": "Agent text only: the same words made safe to read aloud.",
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "additionalProperties": {}
+                }
+              },
+              "required": [
+                "seq",
+                "at",
+                "role",
+                "kind",
+                "body"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "message"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rev",
+        "at",
+        "type",
+        "actor",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "at": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "const": "photo.added"
+        },
+        "actor": {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "app",
+            "host"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "photo": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "at": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                },
+                "bytes": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "id",
+                "at",
+                "width",
+                "height",
+                "bytes"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "photo"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rev",
+        "at",
+        "type",
+        "actor",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "at": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "const": "photo.rejected"
+        },
+        "actor": {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "app",
+            "host"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rev",
+        "at",
+        "type",
+        "actor",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "at": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "const": "photo.deleted"
+        },
+        "actor": {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "app",
+            "host"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "photoId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "photoId"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rev",
+        "at",
+        "type",
+        "actor",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "at": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "const": "tool.started"
+        },
+        "actor": {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "app",
+            "host"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "callId": {
+              "type": "string"
+            },
+            "tool": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "callId",
+            "tool"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rev",
+        "at",
+        "type",
+        "actor",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "at": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "const": "tool.completed"
+        },
+        "actor": {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "app",
+            "host"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "callId": {
+              "type": "string"
+            },
+            "tool": {
+              "type": "string"
+            },
+            "ok": {
+              "type": "boolean"
+            },
+            "units": {
+              "type": "number"
+            },
+            "errorCode": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "callId",
+            "tool",
+            "ok",
+            "units"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rev",
+        "at",
+        "type",
+        "actor",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "at": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "const": "app.updated"
+        },
+        "actor": {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "app",
+            "host"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string"
+            },
+            "value": {}
+          },
+          "required": [
+            "kind",
+            "value"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rev",
+        "at",
+        "type",
+        "actor",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "at": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "const": "ui.changed"
+        },
+        "actor": {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "app",
+            "host"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "ui": {
+              "type": "object",
+              "properties": {
+                "screen": {
+                  "type": "string"
+                },
+                "target": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "focus": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "screen": {
+                          "type": "string"
+                        },
+                        "target": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "screen",
+                        "target"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "following": {
+                  "type": "boolean"
+                },
+                "mediaRequest": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "type": "string",
+                          "const": "photo"
+                        },
+                        "mode": {
+                          "type": "string",
+                          "enum": [
+                            "camera",
+                            "upload",
+                            "either"
+                          ]
+                        },
+                        "reason": {
+                          "type": "string"
+                        },
+                        "at": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "mode",
+                        "reason",
+                        "at"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "notice": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "text": {
+                          "type": "string"
+                        },
+                        "tone": {
+                          "type": "string",
+                          "enum": [
+                            "info",
+                            "warn"
+                          ]
+                        },
+                        "at": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "text",
+                        "tone",
+                        "at"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "nudge": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "target": {
+                          "type": "string"
+                        },
+                        "label": {
+                          "type": "string"
+                        },
+                        "at": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "target",
+                        "label",
+                        "at"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "capturing": {
+                  "type": "boolean"
+                },
+                "available": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "view": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "additionalProperties": {}
+                }
+              },
+              "required": [
+                "screen",
+                "target",
+                "focus",
+                "following",
+                "mediaRequest",
+                "notice",
+                "nudge",
+                "capturing",
+                "available",
+                "view"
+              ],
+              "additionalProperties": false
+            },
+            "by": {
+              "type": "string",
+              "enum": [
+                "agent",
+                "client",
+                "app"
+              ]
+            }
+          },
+          "required": [
+            "ui",
+            "by"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rev",
+        "at",
+        "type",
+        "actor",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "at": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "const": "client.action"
+        },
+        "actor": {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "app",
+            "host"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "copy",
+                "save"
+              ]
+            },
+            "target": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "action",
+            "target"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rev",
+        "at",
+        "type",
+        "actor",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "at": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "const": "presence.changed"
+        },
+        "actor": {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "app",
+            "host"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "presence": {
+              "type": "string",
+              "enum": [
+                "idle",
+                "thinking",
+                "speaking",
+                "listening"
+              ]
+            }
+          },
+          "required": [
+            "presence"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rev",
+        "at",
+        "type",
+        "actor",
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "at": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "const": "budget.updated"
+        },
+        "actor": {
+          "type": "string",
+          "enum": [
+            "client",
+            "agent",
+            "app",
+            "host"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "unitsTotal": {
+              "type": "number"
+            },
+            "unitsUsed": {
+              "type": "number"
+            },
+            "unitsRemaining": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "unitsTotal",
+            "unitsUsed",
+            "unitsRemaining"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rev",
+        "at",
+        "type",
+        "actor",
+        "data"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

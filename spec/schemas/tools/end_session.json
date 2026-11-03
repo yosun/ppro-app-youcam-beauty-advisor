@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/end_session.json",
+  "title": "End the consultation (end_session) arguments",
+  "description": "End the consultation. The client's photos and result images are deleted; the transcript stays available for a short time. Say goodbye with say first. Free.",
+  "type": "object",
+  "properties": {},
+  "additionalProperties": false
+}

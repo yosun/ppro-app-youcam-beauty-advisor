@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/try_on_look.json",
+  "title": "Try on a curated look (try_on_look) arguments",
+  "description": "Apply one curated YouCam makeup look (an id from list_makeup_looks) to the client's photo. The client sees the result image in the chat. Costs 2 units.",
+  "type": "object",
+  "properties": {
+    "look_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]{1,80}$"
+    },
+    "photo_id": {
+      "description": "A specific shared photo. Omit to use the latest photo.",
+      "type": "string",
+      "maxLength": 64
+    }
+  },
+  "required": [
+    "look_id"
+  ],
+  "additionalProperties": false
+}

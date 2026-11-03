@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/analyze_skin_tone.json",
+  "title": "Skin tone and colors (analyze_skin_tone) arguments",
+  "description": "Run YouCam AI Facial Color Tones analysis on the client's photo: skin tone and eye, lip, brow and hair colors as exact #RRGGBB values, useful for foundation and lipstick shade matching. Results appear on the client's Face screen. Costs 20 units. Hair color drifts under warm light, so prefer the other colors.",
+  "type": "object",
+  "properties": {
+    "photo_id": {
+      "description": "A specific shared photo. Omit to use the latest photo.",
+      "type": "string",
+      "maxLength": 64
+    }
+  },
+  "additionalProperties": false
+}

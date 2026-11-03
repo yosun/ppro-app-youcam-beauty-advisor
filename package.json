@@ -1,0 +1,69 @@
+{
+  "name": "ppro-app-youcam-beauty-advisor",
+  "version": "0.1.0",
+  "description": "A Populi Professional (ppro) app: a YouCam-powered beauty advisor that any external AI agent can fully control through the open PPRO App API.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "author": "Yosun Chang",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yosun/ppro-app-youcam-beauty-advisor.git"
+  },
+  "keywords": [
+    "ppro-app",
+    "populi",
+    "ai-agent",
+    "mcp",
+    "youcam",
+    "beauty",
+    "skin-analysis",
+    "virtual-try-on"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "start": "node --env-file-if-exists=.env dist/server/main.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "tsx --test tests/*.test.ts",
+    "test:e2e": "playwright test",
+    "spec:build": "tsx scripts/build-spec.ts",
+    "spec:check": "tsx scripts/build-spec.ts --check",
+    "agent:demo": "tsx examples/scripted-agent.ts",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm test && npm run spec:check"
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.1.6",
+    "@modelcontextprotocol/server": "^2.4.0",
+    "hono": "^4.13.16",
+    "lucide-react": "^1.66.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "sharp": "^0.35.5",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.0",
+    "@modelcontextprotocol/client": "^2.4.0",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^22.20.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.2.1",
+    "eslint": "^10.14.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.0.0",
+    "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.1",
+    "vite": "^8.3.5",
+    "yaml": "^2.9.1"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/present_look.json",
+  "title": "Present a look (present_look) arguments",
+  "description": "Put the look you recommend on the client's Look, Steps and Shades screens: a title, the steps to get it, the exact shades (with hex codes the client can copy) and, as the before-and-after, a try-on image you made with a try_on tool. Free. Call it after a try-on, then use ui_show to take the client there. Calling it again replaces the previous look.",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 70
+    },
+    "question": {
+      "description": "A neutral restatement of the client's question.",
+      "type": "string",
+      "maxLength": 140
+    },
+    "steps": {
+      "minItems": 1,
+      "maxItems": 8,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 160
+      }
+    },
+    "shades": {
+      "maxItems": 8,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 24
+          },
+          "hex": {
+            "type": "string",
+            "pattern": "^#?[0-9A-Fa-f]{6}$"
+          },
+          "area": {
+            "type": "string",
+            "enum": [
+              "lips",
+              "cheeks",
+              "eyes",
+              "face",
+              "brows"
+            ]
+          }
+        },
+        "required": [
+          "label",
+          "hex"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "image_id": {
+      "description": "A try-on result image id returned by a try_on tool.",
+      "type": "string"
+    },
+    "before_photo_id": {
+      "description": "The client's photo to show as the before. Omit for none.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "steps"
+  ],
+  "additionalProperties": false
+}

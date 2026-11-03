@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/try_on_full_look.json",
+  "title": "Try on a complete look (try_on_full_look) arguments",
+  "description": "Apply a complete custom makeup look to the client's photo in one YouCam Makeup Virtual Try-On: optional sheer skin tint, contour and highlight placed for their face shape, an eyeshadow placement, eyeliner and lash styles, blush placement and lip color. Costs 1 unit. Contour and highlight are placed using the client's measured skin color and face shape, which are taken from earlier analyze_skin_tone and analyze_face results in this session unless you pass skin_color and face_shape. Choose pattern labels only from these menus:\nEYESHADOW PATTERNS (give exactly as many colors as the pattern lists):\n1color1 (1 color, soft): One sheer shade across the lid, diffused toward the crease.\n1color2 (1 color, soft): One sheer shade blended across the lid and softly around the eye.\n2colors1 (2 colors, soft): Light inner lid, slightly deeper outer lid, close to the lash line.\n2colors2 (2 colors, soft): Light inner lid fading to a deeper outer lid: a simple gradient at the lash line.\n2colors4 (2 colors, soft): One tone across the upper lid, a second along the outer lower lash line.\n2colors6 (2 colors, soft): Light inner lid, deeper shade blended over the outer lid and corner.\n3colors1 (3 colors, soft): Light inner corner, medium center, deeper outer corner, kept near the lash line.\n3colors3 (3 colors, soft): Light inner corner, soft crease shade, deeper tone on the outer lower lash line.\n3colors10 (3 colors, soft): Light inner corner, medium lid and crease, deeper outer corner, softly blended.\n3colors8 (3 colors, bold): Light inner corner, rich lid shade, deeper tone along the outer lower lashes.\n3colors12 (3 colors, bold): Rich lid color with a deeper winged outer corner and a light inner lower lash line.\n3colors367 (3 colors, bold): Sculpted smoky eye: layered lid, crease and outer corner, touch of lower lashes.\nEYELINER PATTERNS:\nHalfRim19: Thin upper line with a short horizontal tail. Subtle, elongating.\nHalfRim21: Thin upper line ending in a short tapered tip; faint lower liner.\nHalfRim61: Soft, shadow-like upper line that fades outward. Very natural.\nUpper116: Soft upper line fading into a short blurred tip. Diffused definition.\nUpper60: Upper line thickening into a sleek, upturned cat-eye wing.\nFullRim3: Upturned wing with a thin lower line: a defined cat eye.\nSmoke21: Smoky liner diffused along upper and lower lash lines.\nFullRim56: Clean liner framing the whole upper and lower lash line.\nLASH PATTERNS:\nUpper1: Neatly separated upper lashes with a soft curl. Natural.\nNatural17: Fine, lifted upper lashes with soft lower lashes. Fresh.\nUpper&Lower2: Evenly curled upper lashes with fine lower lashes. Defined everyday.\nUpperDense3: Dark separated lashes, longest at the center. Opens the eye.\nWinged35: Long, full lashes sweeping to the outer corner. Dramatic lift.\nBLUSH PLACEMENTS: apples (round color on the apples of the cheeks), lifted (diagonal sweep from cheek toward the temple), draped (horizontal wash across the cheekbone).",
+  "type": "object",
+  "properties": {
+    "look": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32
+        },
+        "intensity": {
+          "type": "string",
+          "enum": [
+            "soft",
+            "medium",
+            "bold"
+          ]
+        },
+        "eyeshadow": {
+          "type": "object",
+          "properties": {
+            "pattern": {
+              "type": "string",
+              "enum": [
+                "1color1",
+                "1color2",
+                "2colors1",
+                "2colors2",
+                "2colors4",
+                "2colors6",
+                "3colors1",
+                "3colors3",
+                "3colors10",
+                "3colors8",
+                "3colors12",
+                "3colors367"
+              ]
+            },
+            "colors": {
+              "minItems": 1,
+              "maxItems": 3,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^#?[0-9A-Fa-f]{6}$"
+              }
+            },
+            "finish": {
+              "type": "string",
+              "enum": [
+                "matte",
+                "shimmer"
+              ]
+            }
+          },
+          "required": [
+            "pattern",
+            "colors"
+          ],
+          "additionalProperties": false
+        },
+        "eyeliner": {
+          "type": "object",
+          "properties": {
+            "pattern": {
+              "type": "string",
+              "enum": [
+                "HalfRim19",
+                "HalfRim21",
+                "HalfRim61",
+                "Upper116",
+                "Upper60",
+                "FullRim3",
+                "Smoke21",
+                "FullRim56"
+              ]
+            },
+            "color": {
+              "type": "string",
+              "pattern": "^#?[0-9A-Fa-f]{6}$"
+            }
+          },
+          "required": [
+            "pattern",
+            "color"
+          ],
+          "additionalProperties": false
+        },
+        "lashes": {
+          "type": "object",
+          "properties": {
+            "pattern": {
+              "type": "string",
+              "enum": [
+                "Upper1",
+                "Natural17",
+                "Upper&Lower2",
+                "UpperDense3",
+                "Winged35"
+              ]
+            }
+          },
+          "required": [
+            "pattern"
+          ],
+          "additionalProperties": false
+        },
+        "blush": {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "string",
+              "pattern": "^#?[0-9A-Fa-f]{6}$"
+            },
+            "placement": {
+              "type": "string",
+              "enum": [
+                "apples",
+                "lifted",
+                "draped"
+              ]
+            }
+          },
+          "required": [
+            "color"
+          ],
+          "additionalProperties": false
+        },
+        "lip": {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "string",
+              "pattern": "^#?[0-9A-Fa-f]{6}$"
+            },
+            "finish": {
+              "type": "string",
+              "enum": [
+                "matte",
+                "satin",
+                "gloss",
+                "sheer"
+              ]
+            }
+          },
+          "required": [
+            "color"
+          ],
+          "additionalProperties": false
+        },
+        "foundation": {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "string",
+              "pattern": "^#?[0-9A-Fa-f]{6}$"
+            },
+            "coverage": {
+              "type": "string",
+              "enum": [
+                "sheer",
+                "medium"
+              ]
+            }
+          },
+          "required": [
+            "color"
+          ],
+          "additionalProperties": false
+        },
+        "contour": {
+          "type": "boolean"
+        },
+        "highlight": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "intensity"
+      ],
+      "additionalProperties": false
+    },
+    "skin_color": {
+      "type": "string",
+      "pattern": "^#?[0-9A-Fa-f]{6}$"
+    },
+    "face_shape": {
+      "type": "string",
+      "maxLength": 40
+    },
+    "photo_id": {
+      "description": "A specific shared photo. Omit to use the latest photo.",
+      "type": "string",
+      "maxLength": 64
+    }
+  },
+  "required": [
+    "look"
+  ],
+  "additionalProperties": false
+}

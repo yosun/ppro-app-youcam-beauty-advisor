@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/analyze_face.json",
+  "title": "Face shape and features (analyze_face) arguments",
+  "description": "Run YouCam AI Face Attribute analysis on the client's photo: face shape and eye, eyelid, brow, lip, nose and cheekbone shapes. Results appear on the client's Face screen. Costs 10 units for up to 5 features and 20 for 6-14.",
+  "type": "object",
+  "properties": {
+    "features": {
+      "description": "Features to read. Omit for face, eye, lip and brow shape plus cheekbones. Colors come from analyze_skin_tone.",
+      "maxItems": 14,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "faceShape",
+          "eyeShape",
+          "eyeSize",
+          "eyeAngle",
+          "eyeDistance",
+          "eyelid",
+          "eyebrowShape",
+          "eyebrowThickness",
+          "lipShape",
+          "noseWidth",
+          "noseLength",
+          "cheekbones",
+          "eyeColor",
+          "hairColor",
+          "eyebrowColor",
+          "lipColor"
+        ]
+      }
+    },
+    "photo_id": {
+      "description": "A specific shared photo. Omit to use the latest photo.",
+      "type": "string",
+      "maxLength": 64
+    }
+  },
+  "additionalProperties": false
+}

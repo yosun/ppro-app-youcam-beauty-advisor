@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/wait_for_events.json",
+  "title": "Wait for the client (wait_for_events) arguments",
+  "description": "Wait until something happens in the session (a client message, a photo, a screen change) and return the new events. Pass the highest rev you have seen as after_rev. Returns at once if events are already waiting, otherwise after up to 25 seconds with an empty list. Use it as the core of your loop. Free.",
+  "type": "object",
+  "properties": {
+    "after_rev": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "timeout_seconds": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 25
+    },
+    "types": {
+      "maxItems": 15,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "session.started",
+          "session.ended",
+          "session.warning",
+          "consent.updated",
+          "message.created",
+          "photo.added",
+          "photo.rejected",
+          "photo.deleted",
+          "tool.started",
+          "tool.completed",
+          "app.updated",
+          "ui.changed",
+          "client.action",
+          "presence.changed",
+          "budget.updated"
+        ]
+      }
+    }
+  },
+  "required": [
+    "after_rev"
+  ],
+  "additionalProperties": false
+}

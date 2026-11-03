@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/ui_compare.json",
+  "title": "Move the before-and-after slider (ui_compare) arguments",
+  "description": "Move the before-and-after slider on the Look screen: reveal 0 shows only the before photo, 100 only the try-on. Use it to reveal the try-on while you describe it. Free. Needs a look presented with both a try-on image and a before photo.",
+  "type": "object",
+  "properties": {
+    "reveal": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "How much of the try-on is visible, 0 to 100 percent."
+    }
+  },
+  "required": [
+    "reveal"
+  ],
+  "additionalProperties": false
+}

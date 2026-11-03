@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/yosun/ppro-app-youcam-beauty-advisor/main/spec/schemas/tools/analyze_skin.json",
+  "title": "Skin analysis (analyze_skin) arguments",
+  "description": "Run YouCam AI Skin Analysis on the client's photo. Returns a 0-100 score per concern (higher is healthier) and overlay images the client can see on their Skin screen. Costs 9-16 units depending on how many concerns. The face must fill most of the photo (over 60% of its width) or YouCam refuses it; a photo_problem error says how the client should retake it.",
+  "type": "object",
+  "properties": {
+    "concerns": {
+      "description": "Concerns to score. Omit for the standard set of 8 (acne, pore, texture, wrinkle, redness, oiliness, moisture, dark_circle_v2).",
+      "maxItems": 16,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "acne",
+          "pore",
+          "texture",
+          "wrinkle",
+          "redness",
+          "oiliness",
+          "moisture",
+          "dark_circle_v2",
+          "eye_bag",
+          "radiance",
+          "firmness",
+          "age_spot",
+          "tear_trough",
+          "droopy_upper_eyelid",
+          "droopy_lower_eyelid",
+          "skin_type"
+        ]
+      }
+    },
+    "photo_id": {
+      "description": "A specific shared photo. Omit to use the latest photo.",
+      "type": "string",
+      "maxLength": 64
+    }
+  },
+  "additionalProperties": false
+}
